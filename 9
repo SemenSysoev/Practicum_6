@@ -1,0 +1,38 @@
+import math
+import matplotlib.pyplot as plt
+
+def circle_relationship(x1, y1, r1, x2, y2, r2):
+    d = math.sqrt((x2 - x1)**2 + (y2 - y1)**2)
+    if d > r1 + r2:
+        return "Окружности лежат одна вне другой, не касаясь"
+    elif d == r1 + r2:
+        return "Окружности имеют внешнее касание"
+    elif abs(r1 - r2) < d < r1 + r2:
+        return "Окружности пересекаются"
+    elif d == abs(r1 - r2) and d != 0:
+        return "Окружности имеют внутреннее касание"
+    elif d < abs(r1 - r2):
+        return "Одна окружность лежит внутри другой, не касаясь"
+    else:
+        return "Окружности совпадают или имеют неопределённое расположение"
+
+def plot_circles(x1, y1, r1, x2, y2, r2):
+    fig, ax = plt.subplots()
+    circle1 = plt.Circle((x1, y1), r1, fill=False, color='blue', label='Окружность 1')
+    circle2 = plt.Circle((x2, y2), r2, fill=False, color='red', label='Окружность 2')
+    ax.add_patch(circle1)
+    ax.add_patch(circle2)
+    ax.set_aspect('equal', adjustable='datalim')
+    ax.plot()    
+    plt.xlim(min(x1-r1, x2-r2) - 1, max(x1+r1, x2+r2) + 1)
+    plt.ylim(min(y1-r1, y2-r2) - 1, max(y1+r1, y2+r2) + 1)
+    plt.legend()
+    plt.title(circle_relationship(x1, y1, r1, x2, y2, r2))
+    plt.grid(True)
+    plt.show()
+
+x1, y1, r1 = 0, 0, 5
+x2, y2, r2 = 10, 0, 4
+
+print(circle_relationship(x1, y1, r1, x2, y2, r2))
+plot_circles(x1, y1, r1, x2, y2, r2)
