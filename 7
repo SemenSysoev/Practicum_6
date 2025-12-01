@@ -1,0 +1,10 @@
+k = int(input())
+A = False
+for i in range(k+1):
+    for j in range(k+1):
+        if 5*i + 7*j == k:
+            print('да')
+            A = True
+            break
+if A == False:
+    print('нет')
