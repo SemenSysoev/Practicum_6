@@ -1,0 +1,48 @@
+import turtle
+
+def rectangles_relationship(r1, r2):
+    x1l, y1t, x1r, y1b = r1
+    x2l, y2t, x2r, y2b = r2
+    if x1r < x2l or x2r < x1l or y1b > y2t or y2b > y1t:
+        if x1r == x2l or x2r == x1l or y1b == y2t or y2b == y1t:
+            return "Прямоугольники имеют касание"
+        else:
+            return "Прямоугольники лежат вне друг друга, не касаясь"
+    else:
+        inside1 = x2l <= x1l <= x1r <= x2r and y2t >= y1t >= y1b >= y2b
+        inside2 = x1l <= x2l <= x2r <= x1r and y1t >= y2t >= y2b >= y1b
+        if inside1 or inside2:
+            if x1l == x2l or x1r == x2r or y1t == y2t or y1b == y2b:
+                return "Прямоугольники имеют касание"
+            return "Один прямоугольник лежит внутри другого, не касаясь"
+        else:
+            return "Прямоугольники имеют пересечение"
+
+def draw_rectangle(t, rect, color):
+    x_left, y_top, x_right, y_bottom = rect
+    t.penup()
+    t.goto(x_left, y_top)
+    t.pendown()
+    t.pencolor(color)
+    t.fillcolor(color)
+    t.begin_fill()
+    for _ in range(2):
+        t.forward(x_right - x_left)
+        t.right(90)
+        t.forward(y_top - y_bottom)
+        t.right(90)
+    t.end_fill()
+r1 = (0, 100, 150, 50)
+r2 = (140, 90, 220, 30)
+
+print(rectangles_relationship(r1, r2))
+
+screen = turtle.Screen()
+t = turtle.Turtle()
+t.speed(1)
+
+draw_rectangle(t, r1, 'blue')
+draw_rectangle(t, r2, 'red')
+
+t.hideturtle()
+screen.mainloop()
