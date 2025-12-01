@@ -1,0 +1,8 @@
+a, b = map(str, input().split('-'))
+if abs(ord(b[0]) - ord(a[0])) == 1 and abs(int(b[1])-int(a[1])) == 2:
+    print('верно')
+else:
+    if abs(ord(b[0]) - ord(a[0])) == 2 and abs(int(b[1])-int(a[1])) == 1:
+        print('верно')
+    else:
+        print('ошибка')
